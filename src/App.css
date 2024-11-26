@@ -12,10 +12,6 @@
     justify-content: space-between;
     min-height: 100vh
 }
-.fb-page {
-    min-width: 300px;
-    min-height: 500px;
-}
 
 .inner-img {
     transition: 0.3s;
@@ -192,4 +188,10 @@
 .fade-exit-active {
     opacity: 0;
 }
+/* styles.css */
+.facebook-box .fb-page-container {
+    width: 100%;
+    margin: 0 auto;  /* Center the box */
+}
+
 

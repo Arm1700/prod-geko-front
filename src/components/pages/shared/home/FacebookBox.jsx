@@ -1,54 +1,58 @@
-import { useEffect } from 'react';
+import { useEffect} from 'react';
 
 const FacebookBox = () => {
+
     useEffect(() => {
+        // Инициализация Facebook SDK
         const initializeFB = () => {
             if (window.FB) {
-                window.FB.XFBML.parse();
+                window.FB.init({
+                    appId: '1263217894882530', // Ваш Facebook App ID
+                    autoLogAppEvents: true,
+                    xfbml: true,
+                    version: 'v21.0', // Версия SDK
+                });
+                window.FB.XFBML.parse(); // Парсинг XFBML (обновление содержимого)
             } else {
                 console.warn('Facebook SDK не загружен.');
             }
         };
 
-        // Ждём загрузки SDK
+        // Проверяем, загружен ли Facebook SDK
         if (!window.fbAsyncInit) {
-            window.fbAsyncInit = function () {
-                initializeFB();
-            };
+            window.fbAsyncInit = initializeFB;
         } else {
             initializeFB();
         }
-    }, []);
+    }, []); // Инициализируем SDK только один раз при монтировании компонента
 
     return (
         <div className="facebook-box">
-            {/* Facebook Page plugin with Like button inside */}
             <div className="fb-page-container" style={{ position: 'relative' }}>
                 <div
                     className="fb-page"
-                    data-href="https://www.facebook.com/GekoOnlineEducation"  // Facebook page URL to display
-                    data-tabs="timeline"
-                    data-width="380"
-                    data-height="400"
-                    data-small-header="false"
-                    data-adapt-container-width="true"
-                    data-hide-cover="false"
-                    data-show-facepile="true"
+                    data-href="https://www.facebook.com/GekoOnlineEducation" // Ссылка на вашу страницу
+                    data-tabs="timeline" // Показываем таймлайн
+                    data-width='280' // Динамическая ширина
+                    data-height="400" // Высота блока
+                    data-small-header="false" // Отключение маленького заголовка
+                    data-adapt-container-width="true" // Адаптация ширины под контейнер
+                    data-hide-cover="false" // Показываем обложку
+                    data-show-facepile="true" // Показываем фотографии друзей
                 ></div>
 
-                {/* Facebook Like button inside the page plugin */}
                 <div
                     className="fb-like"
-                    data-href="https://www.facebook.com/GekoOnlineEducation"
-                    data-layout="button"
-                    data-action="like"
-                    data-size="small"
-                    data-share="false"
+                    data-href="https://www.facebook.com/GekoOnlineEducation" // Ссылка на вашу страницу
+                    data-layout="button" // Тип кнопки
+                    data-action="like" // Действие кнопки
+                    data-size="small" // Размер кнопки
+                    data-share="false" // Отключаем кнопку шаринга
                     style={{
                         position: 'absolute',
-                        top: '15%',  // Adjust the vertical position as needed
-                        left: '11%', // Horizontally center it
-                        transform: 'translateX(-50%)', // Ensures it is perfectly centered
+                        top: '18%', // Позиционирование кнопки
+                        left: '38px', // Позиционирование кнопки
+                        transform: 'translateX(-50%)', // Центрирование кнопки по горизонтали
                     }}
                 ></div>
             </div>

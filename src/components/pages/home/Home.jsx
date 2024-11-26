@@ -41,7 +41,7 @@ export default function Home() {
             {/*<Chat/>*/}
             <div className="flex content-center justify-center gap-20 py-10">
                 <div className='popularDiv mx-[auto] px-5'>
-                    <div className="flex justify-between">
+                    <div className="flex md:flex-row flex-col md:justify-between">
                         <h1 className="text-custom-28 font-roboto-slab font-bold text-primaryDark">
                             {t('popular_cours')}
                         </h1>
@@ -97,7 +97,7 @@ export default function Home() {
             </div>
             <div className="text-start pt-20  flex justify-center">
                 <div className='popularDiv max-w-[1300px] px-10 lg:px-0 '>
-                    <div className="flex justify-between">
+                    <div className="flex md:flex-row flex-col md:justify-between">
                         <h1 className="text-custom-28 font-roboto-slab font-bold text-primaryDark">
                             {t('EVENTS')}
                         </h1>
@@ -127,7 +127,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className='flex flex-col justify-center'>
+            <div className='flex flex-col justify-center ove'>
                 <div className="text-center lg:px-20 px-5 pt-10 pb-5">
                     <h1 className="text-custom-28 font-roboto-slab font-bold text-primaryDark">
                         {t('What_People_Say')}

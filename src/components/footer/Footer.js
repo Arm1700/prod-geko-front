@@ -62,10 +62,10 @@ const Footer = () => {
                         )
                     })}
                 </ul>
-                <div className='column-start-3 row-span-2'>
+                <div className='column-start-3 row-span-2  h-[400px]'>
                     <FacebookBox/>
                 </div>
-                <div className="map-container column-start-3 row-span-2 w-full h-[400px] rounded-md overflow-hidden">
+                <div className="map-container column-start-4 row-span-2 w-full h-[400px] rounded-md overflow-hidden">
                     <Map
                         {...viewport}
                         onMove={(evt) => setViewport(evt.viewState)}

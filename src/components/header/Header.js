@@ -13,10 +13,10 @@ export default function Header() {
     };
 
     return (
-        <header className=" flex flex-col">
-            <div className=" bg-secondary">
+        <header className="flex flex-col">
+              <div className=" bg-secondary">
                 <div
-                    className="py-[10px] text-pseudo flex items-center  justify-between max:px-5 max-w-[1200px] mx-auto">
+                    className="py-[10px] gap-3 text-pseudo flex items start max:items-center max:flex-row flex-col max:justify-between max:px-3 px-5 max-w-[1200px] mx-auto">
                     <div className="w-70 flex md:flex-row flex-col md:items-center gap-3 justify-between">
                         <div className={'flex items-center gap-3'}>
                             <BsTelephone/>
