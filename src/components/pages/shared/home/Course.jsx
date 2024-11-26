@@ -20,7 +20,7 @@ const CourseSlider = () => {
             if (screenWidth >= 992) {
                 setSlidesToShow(6);
                 setSpaceBetween(30);
-            } else if (screenWidth >= 480) {
+            } else if (screenWidth >= 640) {
                 setSlidesToShow(4);
                 setSpaceBetween(10);
             } else {

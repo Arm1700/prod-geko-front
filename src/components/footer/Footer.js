@@ -51,7 +51,7 @@ const Footer = () => {
                         <p>gekoeducation1@gmail.com</p>
                     </div>
                 </div>
-                <ul className='flex flex-col items-center content-start flex-wrap gap-3 middle:order-none order-2 row-span-2 col-start-2'>
+                <ul className='flex flex-col items-center content-start flex-wrap gap-3 row-span-2 col-start-2'>
                     {routesArray.map(({path, name, id}) => {
                         return (
                             <li className='flex justify-start w-full font-bold' key={id}>
@@ -62,10 +62,10 @@ const Footer = () => {
                         )
                     })}
                 </ul>
-                <div className='column-start-3 row-span-2  h-[400px]'>
+                <div className='column-start-3 row-span-2'>
                     <FacebookBox/>
                 </div>
-                <div className="map-container column-start-4 row-span-2 w-full h-[400px] rounded-md overflow-hidden">
+                <div className="map-container column-start-3 row-span-2 w-full h-[400px] rounded-md overflow-hidden">
                     <Map
                         {...viewport}
                         onMove={(evt) => setViewport(evt.viewState)}
