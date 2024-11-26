@@ -127,7 +127,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className='flex flex-col justify-center ove'>
+            <div className='flex flex-col justify-center overflow-hidden'>
                 <div className="text-center lg:px-20 px-5 pt-10 pb-5">
                     <h1 className="text-custom-28 font-roboto-slab font-bold text-primaryDark">
                         {t('What_People_Say')}

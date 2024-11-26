@@ -44,7 +44,7 @@ export default function AboutUs() {
             </div>
         </section>
         <section
-            className="my-16 gap-8 px-5 w-[100%]  sm:w-[100%] flex items-start justify-center">
+            className="my-16 gap-8 px-5 w-[100%] sm:w-full flex items-start justify-center">
             <BiSolidQuoteLeft className="w-[40px] h-[40px]  text-primary"/>
             <p className=" py-2 font-roboto-slab font-bold text-primaryDark flex flex-col mid:w-[50%] w-[100%] sm:text-2xl text-xl">
                 {t('PS')}
