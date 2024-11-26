@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Endpoint URL
-const api = 'https://dev.gekoeducation.com/api/contact/';
+const api = 'https://gekoeducation.com/api/contact/';
 
 export async function postData(data, setSelectedCategory, setSelectedCountry) {
   try {

@@ -67,7 +67,7 @@ export default function Review() {
                                     src={review?.image && typeof review?.image === 'string' && review?.image.startsWith('https')
                                         ? review?.image
                                         : review?.image
-                                            ? `https://dev.gekoeducation.com${review?.image}`
+                                            ? `https://gekoeducation.com${review?.image}`
                                             : 'https://eduma.thimpress.com/wp-content/uploads/2022/07/thumnail-cate-7-170x170.png'}
                                     className="rounded-full p-2 border-color86"
                                     style={{

@@ -59,12 +59,12 @@ export const DataProvider = ({children}) => {
                     lessonInfoResponse,
                     teamsResponse,
                 ] = await Promise.all([
-                    fetch(`https://dev.gekoeducation.com/api/categories/?language=${language}`),
-                    fetch(`https://dev.gekoeducation.com/api/popular_courses/?language=${language}`),
-                    fetch(`https://dev.gekoeducation.com/api/events/?language=${language}`),
-                    fetch(`https://dev.gekoeducation.com/api/reviews/?language=${language}`),
-                    fetch(`https://dev.gekoeducation.com/api/lesson_info/?language=${language}`),
-                    fetch(`https://dev.gekoeducation.com/api/team/?language=${language}`)
+                    fetch(`https://gekoeducation.com/api/categories/?language=${language}`),
+                    fetch(`https://gekoeducation.com/api/popular_courses/?language=${language}`),
+                    fetch(`https://gekoeducation.com/api/events/?language=${language}`),
+                    fetch(`https://gekoeducation.com/api/reviews/?language=${language}`),
+                    fetch(`https://gekoeducation.com/api/lesson_info/?language=${language}`),
+                    fetch(`https://gekoeducation.com/api/team/?language=${language}`)
                 ]);
 
                 if (!categoriesResponse.ok) throw new Error(`Error fetching categories: ${categoriesResponse.statusText}`);
@@ -105,7 +105,7 @@ export const DataProvider = ({children}) => {
         return image && typeof image === 'string'
             ? image.startsWith('https')
                 ? image
-                : `https://dev.gekoeducation.com${image}`
+                : `https://gekoeducation.com${image}`
             : 'https://eduma.thimpress.com/wp-content/uploads/2022/07/thumnail-cate-7-170x170.png';
     };
     const renderBullet = (index, className) => {
