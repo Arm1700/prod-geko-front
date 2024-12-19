@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import {DataContext} from "../../context/DataProvider";
+import {BASE_URL} from "../../context/DataProvider";
 
 export default function Review() {
     const [slidesToShow, setSlidesToShow] = useState(3);
@@ -67,7 +68,7 @@ export default function Review() {
                                     src={review?.image && typeof review?.image === 'string' && review?.image.startsWith('https')
                                         ? review?.image
                                         : review?.image
-                                            ? `https://gekoeducation.com${review?.image}`
+                                            ? `${BASE_URL}${review?.image}`
                                             : 'https://eduma.thimpress.com/wp-content/uploads/2022/07/thumnail-cate-7-170x170.png'}
                                     className="rounded-full p-2 border-color86"
                                     style={{

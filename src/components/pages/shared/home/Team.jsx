@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import {DataContext} from "../../context/DataProvider";
+import {BASE_URL} from "../../context/DataProvider";
 
 export default function Team() {
     const [slidesToShow, setSlidesToShow] = useState(3);
@@ -68,7 +69,7 @@ export default function Team() {
                                     src={team?.image && typeof team?.image === 'string' && team?.image.startsWith('https')
                                         ? team?.image
                                         : team?.image
-                                            ? `https://gekoeducation.com${team?.image}`
+                                            ? `${BASE_URL}${team?.image}`
                                             : 'https://eduma.thimpress.com/wp-content/uploads/2022/07/thumnail-cate-7-170x170.png'}
                                     className="rounded-full p-2 border-color86"
                                     style={{

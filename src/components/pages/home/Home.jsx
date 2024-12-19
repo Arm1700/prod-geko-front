@@ -38,7 +38,6 @@ export default function Home() {
 
 
             <Course/>
-            {/*<Chat/>*/}
             <div className="flex content-center justify-center gap-20 py-1">
                 <div className='popularDiv mx-[auto] px-5'>
                     <div className="flex md:flex-row flex-col md:justify-between gap-3 pb-5">
@@ -76,12 +75,11 @@ export default function Home() {
             </div>
 
             <div className=" gap-20 py-10" style={{
-                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${'/images/books.jpg'})`,
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${'/images/books.webp'})`,
             }}>
                 <div
                     className='popularDiv max-w-[1300px] mx-[auto] bg-cover gap-5 bg-no-repeat md:grid grid-cols-5 flex lg:justify-center items-center flex-col'>
                     {loading ? (
-                        // Skeleton-заполнитель для информации о курсах
                         Array.from({length: 3}).map((_, index) => (
                             <div key={index} className="p-4">
                                 <Skeleton circle={true} height={50} width={50}/>
@@ -108,7 +106,6 @@ export default function Home() {
                         </button>
                     </div>
                     {loading ? (
-                        // Skeleton-заполнитель для событий
                         Array.from({length: 3}).map((_, index) => (
                             <div key={index} className="p-4">
                                 <Skeleton height={150}/>

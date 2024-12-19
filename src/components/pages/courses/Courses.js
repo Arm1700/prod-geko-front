@@ -1,35 +1,32 @@
 import PopularCourse from '../shared/home/PopularCourse';
-import {useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
-import {useContext, useEffect, useState} from 'react';
+import { useContext, useState } from 'react';
 import CoursesMenu from "./CoursesMenu";
-import {useTranslation} from 'react-i18next';
-import {DataContext} from "../context/DataProvider";
+import { useTranslation } from 'react-i18next';
+import { DataContext } from "../context/DataProvider";
 
 export default function Courses() {
-    const {t} = useTranslation();
-    const {categories, courses, getCoursesByCategory, loading, error} = useContext(DataContext);
+    const { t } = useTranslation();
+    const {
+        categories,
+        courses,
+        getCoursesByCategory,
+    } = useContext(DataContext);
     const [gridStyleTF, setGridStyle] = useState(true);
-    const [coursesPerPage, setCoursesPerPage] = useState(6);
     const [currentPage, setCurrentPage] = useState(1);
     const nav = useNavigate();
-    const {id: initialCategoryId} = useParams();
+    const { id: initialCategoryId } = useParams();
     const [categoryId, setCategoryId] = useState(initialCategoryId || '');
     const [showMenu, setShowMenu] = useState(false);
-
+    const coursesPerPage = 6;
     const handleCategoryClick = (id) => {
         setCategoryId(id);
-        setCurrentPage(1); // Reset to the first page on category change
+        setCurrentPage(1);
         nav(id ? `/course-category/${id}` : '/course-category'); // Navigate to category or all courses
     };
 
     const toggleMenu = () => setShowMenu(!showMenu);
-
-    useEffect(() => {
-        setCurrentPage(1); // Reset to the first page if category changes
-        setCoursesPerPage(6); // Reset courses per page if needed
-        setCategoryId(initialCategoryId || ''); // Reset to all courses if no category selected
-    }, [initialCategoryId]);
 
     const paginatedCourses = () => {
         const coursesToShow = categoryId ? getCoursesByCategory(categoryId) : courses;
@@ -44,8 +41,6 @@ export default function Courses() {
     let gridStyle = gridStyleTF ? 'md:grid-cols-3 sm500:grid-cols-2' : 'grid-cols-1';
     const totalCourses = categoryId ? getCoursesByCategory(categoryId).length : courses.length;
 
-    if (loading) return <p>{t("Loading...")}</p>;
-    if (error) return <p>{t("Error")}: {error}</p>;
     if (courses.length === 0) return <p>{t("No courses available")}</p>;
 
     return (
@@ -56,32 +51,32 @@ export default function Courses() {
                 </h1>
                 <div className="flex mid:flex-row flex-col gap-5 py-10">
                     <div className="w-[20%] mid:flex flex-col hidden h-min border-b"
-                         style={{position: 'sticky', top: '10px'}}>
+                        style={{ position: 'sticky', top: '10px' }}>
                         <h1 className="textHover cursor-pointer min-w-max text-2xl font-roboto-slab font-bold text-primaryDark">
                             {t('Categories')}
                         </h1>
                         <p onClick={() => handleCategoryClick('')}
-                           className={`uppercase min-w-max w-full textHover cursor-pointer py-[5px] ${!categoryId ? "text-primary" : "text-primaryDark"}`}>
+                            className={`uppercase min-w-max w-full textHover cursor-pointer py-[5px] ${!categoryId ? "text-primary" : "text-primaryDark"}`}>
                             {t('ALL')}
                         </p>
-                        {categories.map(({id, translation}) => (
+                        {categories.map(({ id, translation }) => (
                             <p onClick={() => handleCategoryClick(id)}
-                               className={`uppercase min-w-max w-full textHover cursor-pointer py-[5px] ${categoryId === id ? "text-primary" : "text-primaryDark"}`}
-                               key={id}>
+                                className={`uppercase min-w-max w-full textHover cursor-pointer py-[5px] ${categoryId === id ? "text-primary" : "text-primaryDark"}`}
+                                key={id}>
                                 {translation?.text}
                             </p>
                         ))}
                     </div>
                     <button onClick={toggleMenu}
-                            className="mid:hidden flex bg-primary text-white font-roboto-slab text-sm uppercase font-bold w-min px-9 py-2">
+                        className="mid:hidden flex bg-primary text-white font-roboto-slab text-sm uppercase font-bold w-min px-9 py-2">
                         {t('Filter')}
                     </button>
                     <div className="mid:w-[80%] w-full">
                         <div className="flex gap-3 items-center">
                             <i className={`fa fa-th-large text-xl hover:text-primary cursor-pointer ${gridStyleTF ? 'text-primary' : 'text-color66'}`}
-                               onClick={() => setGridStyle(true)}></i>
+                                onClick={() => setGridStyle(true)}></i>
                             <i className={`fa fa-list-ul text-lg hover:text-primary cursor-pointer ${!gridStyleTF ? 'text-primary' : 'text-color66'}`}
-                               onClick={() => setGridStyle(false)}></i>
+                                onClick={() => setGridStyle(false)}></i>
                             <p className="text-color66 text-custom-15">
                                 {t('Showing', {
                                     start: (currentPage - 1) * coursesPerPage + 1,
@@ -92,7 +87,7 @@ export default function Courses() {
                         </div>
                         <div
                             className={`opacityPopularCoursecontent-center grid ${gridStyle} ${gridStyleTF ? 'gap-10' : 'gap-0'} py-6`}>
-                            {paginatedCourses().map(({image, id, translation}) => (
+                            {paginatedCourses().map(({ image, id, translation }) => (
                                 <PopularCourse
                                     gridStyleTF={gridStyleTF}
                                     desc={translation?.desc}
@@ -127,7 +122,7 @@ export default function Courses() {
                         )}
                     </div>
                 </div>
-                <CoursesMenu isOpen={showMenu} toggleMenu={toggleMenu} categoryId={categoryId}/>
+                <CoursesMenu isOpen={showMenu} toggleMenu={toggleMenu} categoryId={categoryId} />
             </div>
         </main>
     );

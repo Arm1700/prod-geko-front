@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 
 export default function MainPhoto() {
     const [videoLoaded, setVideoLoaded] = useState(false);
@@ -12,11 +12,13 @@ export default function MainPhoto() {
                 preload="auto"
                 playsInline
                 className="md:absolute top-0 left-0 min-w-full md:h-full object-cover pointer-events-none"
-                poster={'/images/mainLoad.png'}
                 onLoadedData={() => setVideoLoaded(true)}
             >
-                <source src={'/images/main.mp4'} type="video/mp4"/>
+                {/* <source src="/images/main.mp4" type="video/mp4" /> */}
+                <source src="/images/main.webm" type="video/webm" />
+                Your browser does not support the video tag.
             </video>
+
 
 
             {!videoLoaded && (

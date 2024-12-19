@@ -15,7 +15,7 @@ import {useTranslation} from "react-i18next";
 import {DataContext} from "../../context/DataProvider";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
-
+import {BASE_URL} from "../../context/DataProvider";
 
 export default function CoursePage() {
     const nav = useNavigate();
@@ -81,7 +81,7 @@ export default function CoursePage() {
                                 src={pickedCourse?.image && typeof pickedCourse?.image === 'string' && pickedCourse?.image.startsWith('https')
                                     ? pickedCourse?.image
                                     : pickedCourse?.image
-                                        ? `https://gekoeducation.com${pickedCourse?.image}`
+                                        ? `${BASE_URL}${pickedCourse?.image}`
                                         : 'https://eduma.thimpress.com/wp-content/uploads/2022/07/thumnail-cate-7-170x170.png'}
                                 alt={pickedCourse.translation.title}/>
                             <div className='w-full px-5'>
@@ -114,9 +114,9 @@ export default function CoursePage() {
                                         <p className='text-primaryDark capitalize'>{t("Language")}</p>
                                     </div>
                                     <div className='flex gap-3'>
-                                        <img src="/images/Armenia-flag.jpg" alt="" className='w-[16px]'/>
-                                        <img src="/images/USA-flag.png" alt="" className='w-[16px]'/>
-                                        <img src="/images/Russia-flag.png" alt="" className='w-[16px]'/>
+                                        <img src="/images/Armenia-flag.webp" alt="" className='w-[16px]'/>
+                                        <img src="/images/USA-flag.webp" alt="" className='w-[16px]'/>
+                                        <img src="/images/Russia-flag.webp" alt="" className='w-[16px]'/>
                                     </div>
                                 </div>
                                 <div
@@ -133,7 +133,7 @@ export default function CoursePage() {
                                 <div
                                     className="w-full flex items-center justify-between gap-3 text-color60 text-custom-15">
                                     <div className='flex items-center justify-center gap-1'>
-                                        <img src={'/images/education.png'} alt=""/>
+                                        <img src={'/images/education.webp'} alt=""/>
                                         <p className='text-primaryDark capitalize'>{t("StudentGroup")}</p>
                                     </div>
                                     <p className='text-primaryDark capitalize'>
