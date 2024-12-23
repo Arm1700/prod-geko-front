@@ -12,7 +12,6 @@ module.exports = {
                 secondaryLight: '#8f908f',
                 lightGreen: '#82d16f',
                 lightBlue: '#4489f3',
-                lightYellow: '#ffb606',
                 lightRed: '#dd4b39',
                 color60: '#606060',
                 color7C: '#7C7C7C',

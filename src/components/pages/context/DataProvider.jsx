@@ -1,11 +1,10 @@
-import React, { createContext, useReducer, useEffect, useCallback } from "react";
+import React, { createContext, useReducer, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 
 // Создаем контекст для данных
 export const DataContext = createContext();
 export const BASE_URL = "https://gekoeducation.com";
-// export const BASE_URL = "http://127.0.0.1:8000/";
 
 // Определяем начальное состояние
 const initialState = {
@@ -57,78 +56,41 @@ export const DataProvider = ({ children }) => {
     const [state, dispatch] = useReducer(dataReducer, initialState);
     const { setLoading, setError } = useLoadingError(dispatch);
 
-    const fetchCategories = useCallback(async () => {
+    // Функция для загрузки данных
+    const fetchData = async (type, endpoint) => {
         setLoading(true);
         try {
-            const response = await axios.get(`${BASE_URL}/api/categories/?language=${language}`);
-            dispatch({ type: 'SET_CATEGORIES', payload: response.data });
+            console.log(`Fetching data from ${endpoint}`);
+            const response = await axios.get(`${BASE_URL}${endpoint}?language=${language}`);
+            console.log(`Data received for ${type}:`, response.data);
+            dispatch({ type, payload: response.data });
         } catch (error) {
+            console.error(`Error fetching ${type}:`, error.message);
             setError(error.message);
         } finally {
             setLoading(false);
         }
-    }, [language, setLoading, setError]);
+    };
 
-    const fetchCourses = useCallback(async () => {
-        setLoading(true);
-        try {
-            const response = await axios.get(`${BASE_URL}/api/popular_courses/?language=${language}`);
-            dispatch({ type: 'SET_COURSES', payload: response.data });
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
-        }
-    }, [language, setLoading, setError]);
+    // Функции для загрузки конкретных данных
+    const fetchCategories = () => fetchData('SET_CATEGORIES', '/api/categories/');
+    const fetchCourses = () => fetchData('SET_COURSES', '/api/popular_courses/');
+    const fetchEvents = () => fetchData('SET_EVENTS', '/api/events/');
+    const fetchReviews = () => fetchData('SET_REVIEWS', '/api/reviews/');
+    const fetchLessonInfo = () => fetchData('SET_LESSON_INFO', '/api/lesson_info/');
+    const fetchTeams = () => fetchData('SET_TEAMS', '/api/team/');
 
-    const fetchEvents = useCallback(async () => {
-        setLoading(true);
-        try {
-            const response = await axios.get(`${BASE_URL}/api/events/?language=${language}`);
-            dispatch({ type: 'SET_EVENTS', payload: response.data });
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
-        }
-    }, [language, setLoading, setError]);
+    useEffect(() => {
+        // Загрузка данных по отдельности
+        fetchCategories();
+        fetchCourses();
+        fetchEvents();
+        fetchReviews();
+        fetchLessonInfo();
+        fetchTeams();
+    }, [language]);
 
-    const fetchReviews = useCallback(async () => {
-        setLoading(true);
-        try {
-            const response = await axios.get(`${BASE_URL}/api/reviews/?language=${language}`);
-            dispatch({ type: 'SET_REVIEWS', payload: response.data });
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
-        }
-    }, [language, setLoading, setError]);
-
-    const fetchLessonInfo = useCallback(async () => {
-        setLoading(true);
-        try {
-            const response = await axios.get(`${BASE_URL}/api/lesson_info/?language=${language}`);
-            dispatch({ type: 'SET_LESSON_INFO', payload: response.data });
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
-        }
-    }, [language, setLoading, setError]);
-
-    const fetchTeams = useCallback(async () => {
-        setLoading(true);
-        try {
-            const response = await axios.get(`${BASE_URL}/api/team/?language=${language}`);
-            dispatch({ type: 'SET_TEAMS', payload: response.data });
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
-        }
-    }, [language, setLoading, setError]);
-
+    // Функции для получения данных по ID
     const getCategoriesById = (id) => {
         const parsedId = parseInt(id);
         return state.categories.find(course => course.id === parsedId);
@@ -150,42 +112,15 @@ export const DataProvider = ({ children }) => {
     };
 
     const getImageUrl = (image) => {
-        return image && typeof image === 'string'
-            ? image.startsWith('https')
-                ? image
-                : `${BASE_URL}${image}`
-            : 'https://eduma.thimpress.com/wp-content/uploads/2022/07/thumnail-cate-7-170x170.png';
+        if (image && typeof image === 'string') {
+            return image.startsWith('https') ? image : `${BASE_URL}${image}`;
+        }
+        return 'https://eduma.thimpress.com/wp-content/uploads/2022/07/thumnail-cate-7-170x170.png';
     };
 
     const renderBullet = (index, className) => {
-        return `<span class="${className}" style="background-color: orange;"></span>`;
+        return `<span class="${className}" style="background-color: #FFB606;"></span>`;
     };
-
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                await Promise.all([
-                    fetchCategories(),
-                    fetchCourses(),
-                    fetchEvents(),
-                    fetchReviews(),
-                    fetchLessonInfo(),
-                    fetchTeams(),
-                ]);
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchData();
-    }, [language]);
-
-    if (state.loading || state.error) {
-        return null;
-    }
 
     return (
         <DataContext.Provider value={{
